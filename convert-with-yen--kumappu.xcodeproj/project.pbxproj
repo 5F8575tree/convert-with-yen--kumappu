@@ -11,6 +11,12 @@
 		7877EB5A2B970B84006FE9C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7877EB592B970B84006FE9C6 /* ContentView.swift */; };
 		7877EB5C2B970B85006FE9C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7877EB5B2B970B85006FE9C6 /* Assets.xcassets */; };
 		7877EB5F2B970B85006FE9C6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7877EB5E2B970B85006FE9C6 /* Preview Assets.xcassets */; };
+		78E5194E2B97F0A300AC8AD9 /* ConvertTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5194D2B97F0A300AC8AD9 /* ConvertTabs.swift */; };
+		78E519502B97FB4500AC8AD9 /* CurrencyTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E5194F2B97FB4500AC8AD9 /* CurrencyTabs.swift */; };
+		78E519522B98074E00AC8AD9 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E519512B98074E00AC8AD9 /* Currency.swift */; };
+		78E519542B98084C00AC8AD9 /* ConvertInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E519532B98084C00AC8AD9 /* ConvertInputField.swift */; };
+		78E519562B9810D200AC8AD9 /* ConvertTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E519552B9810D200AC8AD9 /* ConvertTab.swift */; };
+		78E519582B9812F300AC8AD9 /* CurrencyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E519572B9812F300AC8AD9 /* CurrencyTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,12 @@
 		7877EB592B970B84006FE9C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7877EB5B2B970B85006FE9C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7877EB5E2B970B85006FE9C6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		78E5194D2B97F0A300AC8AD9 /* ConvertTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTabs.swift; sourceTree = "<group>"; };
+		78E5194F2B97FB4500AC8AD9 /* CurrencyTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTabs.swift; sourceTree = "<group>"; };
+		78E519512B98074E00AC8AD9 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		78E519532B98084C00AC8AD9 /* ConvertInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertInputField.swift; sourceTree = "<group>"; };
+		78E519552B9810D200AC8AD9 /* ConvertTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertTab.swift; sourceTree = "<group>"; };
+		78E519572B9812F300AC8AD9 /* CurrencyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +65,12 @@
 			children = (
 				7877EB572B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift */,
 				7877EB592B970B84006FE9C6 /* ContentView.swift */,
+				78E519512B98074E00AC8AD9 /* Currency.swift */,
+				78E5194D2B97F0A300AC8AD9 /* ConvertTabs.swift */,
+				78E519552B9810D200AC8AD9 /* ConvertTab.swift */,
+				78E5194F2B97FB4500AC8AD9 /* CurrencyTabs.swift */,
+				78E519572B9812F300AC8AD9 /* CurrencyTab.swift */,
+				78E519532B98084C00AC8AD9 /* ConvertInputField.swift */,
 				7877EB5B2B970B85006FE9C6 /* Assets.xcassets */,
 				7877EB5D2B970B85006FE9C6 /* Preview Content */,
 			);
@@ -137,7 +155,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78E5194E2B97F0A300AC8AD9 /* ConvertTabs.swift in Sources */,
+				78E519562B9810D200AC8AD9 /* ConvertTab.swift in Sources */,
+				78E519542B98084C00AC8AD9 /* ConvertInputField.swift in Sources */,
+				78E519522B98074E00AC8AD9 /* Currency.swift in Sources */,
 				7877EB5A2B970B84006FE9C6 /* ContentView.swift in Sources */,
+				78E519502B97FB4500AC8AD9 /* CurrencyTabs.swift in Sources */,
+				78E519582B9812F300AC8AD9 /* CurrencyTab.swift in Sources */,
 				7877EB582B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

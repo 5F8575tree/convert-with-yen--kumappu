@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var amountToConvert = ""
+    @State private var selectedConvertTab: ConvertTab = .convertTo
+    @State private var selectedCurrencyTab: CurrencyTab = .usd
+    @State private var amountToConvert: String = ""
+    @State private var conversionResult = "0"
     
     var body: some View {
         
         VStack {
-            // close
             HStack {
                 Spacer()
                 
@@ -26,116 +28,40 @@ struct ContentView: View {
             
             Spacer()
             
-            // to-from tabs
-            HStack {
-                Spacer()
-                // convert to
-                Text("Convert to")
-                    .padding(.vertical, 3)
-                    .frame(maxWidth: .infinity)
-                    .background(.white)
-                    .cornerRadius(200)
-                    .overlay(
-                            RoundedRectangle(cornerRadius: 200)
-                                .stroke(Color.black, lineWidth: 1)
-                        )
-                    .shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: 4)
-                    .shadow(color: Color.black.opacity(0.12), radius: 4, x: 0, y: 1)
-                    .font(.custom("Helvetica Neue", size: 14))
-            
-                Spacer()
-                
-                // convert from
-                Text("Convert from")
-                    .padding(.vertical, 3)
-                    .frame(maxWidth: .infinity)
-                    .font(.custom("Helvetica Neue", size: 14))
-                
-                Spacer()
-            }
-            .padding(.vertical, 3)
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 200)
-                    .fill(Color(hex: "#000").opacity(0.03))
-            )
-            .padding(.horizontal, 16)
+            ConvertTabs(activeTab: $selectedConvertTab)
+                .onChange(of: selectedConvertTab) {
+                    performConversion()
+                }
             
             Spacer()
             
-            // currency select tabs
-            HStack {
-                Text("USD")
-                    .padding(.vertical, 3)
-                    .padding(.horizontal)
-                    .font(.custom("Helvetica Neue", size: 14))
-                    .frame(maxWidth: .infinity)
-                    .background(.white)
-                    .cornerRadius(200)
-                    .overlay(
-                            RoundedRectangle(cornerRadius: 200)
-                                .stroke(Color.black, lineWidth: 1)
-                        )
-                    .shadow(color: Color.black.opacity(0.12), radius: 12, x: 0, y: 4)
-                    .shadow(color: Color.black.opacity(0.12), radius: 4, x: 0, y: 1)
-                Text("GBP")
-                    .font(.custom("Helvetica Neue", size: 14))
-                    .frame(maxWidth: .infinity)
-                Text("CAD")
-                    .font(.custom("Helvetica Neue", size: 14))
-                    .frame(maxWidth: .infinity)
-                Text("EUR")
-                    .font(.custom("Helvetica Neue", size: 14))
-                    .frame(maxWidth: .infinity)
-                Text("AUD")
-                    .font(.custom("Helvetica Neue", size: 14))
-                    .frame(maxWidth: .infinity)
-            }
-            .frame(maxWidth: .infinity, maxHeight: 29)
-            .background(
-                RoundedRectangle(cornerRadius: 200)
-                    .fill(Color(hex: "#000").opacity(0.03))
-            )
-            .padding(.horizontal, 24)
-            .padding(.bottom, 36)
+            CurrencyTabs(activeTab: $selectedCurrencyTab)
+                .onChange(of: selectedCurrencyTab) {
+                    performConversion()
+                }
             
-            // input text field
-            TextField("Amount to convert", text: $amountToConvert)
-                        .font(.custom("Helvetica Neue", size: 13))
-                        .frame(height: 56)
-                        .frame(maxWidth: 216)
-                        .padding(.leading)
-                        .background(Color.white.opacity(0.05))
-                        .cornerRadius(16)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(Color.black, lineWidth: 1.5)
-                        )
-                        .padding(.bottom, 24)
-
+            ConvertInputField(amountToConvert: $amountToConvert)
+                .onChange(of: amountToConvert) {
+                    performConversion()
+                }
                         
             Spacer()
             
-            // is approx text
             Text("is approximately")
                 .font(.custom("Helvetica Neue", size: 32))
                 .fontWeight(.medium)
-            
-            // results output
-            Text("5,900")
+            Text(conversionResult)
                 .font(.custom("Helvetica Neue", size: 64))
                 .fontWeight(.medium)
-            
-            // currency text
-            Text("JPY")
+                .frame(minHeight: 76)
+            Text(selectedConvertTab == .convertTo ? "JPY" : selectedCurrencyTab.rawValue)
                 .font(.custom("Helvetica Neue", size: 32))
                 .fontWeight(.medium)
             
             Spacer()
             
-            // convert btn
             Button {
-                
+
             } label: {
                 Text("Convert")
                     .font(.custom("Helvetica Neue", size: 16))
@@ -153,7 +79,6 @@ struct ContentView: View {
             
             Spacer()
             
-            // info btn
             HStack {
                 Spacer()
                 Button {
@@ -176,6 +101,21 @@ struct ContentView: View {
             startRadius: 60,
             endRadius: 500
         ))
+    }
+    
+    func performConversion() {
+        let convertFrom = selectedConvertTab == .convertTo ? Currency.jpy : selectedCurrencyTab.toCurrency()
+        let convertTo = selectedConvertTab == .convertTo ? selectedCurrencyTab.toCurrency() : Currency.jpy
+        
+        conversionResult = convertAmount(amountToConvert, from: convertFrom, to: convertTo)
+    }
+    
+    func convertAmount(_ amount: String, from: Currency, to: Currency) -> String {
+        guard let amountAsDouble = Double(amount) else { return "" }
+        
+        let convertedValue = (amountAsDouble / from.rawValue) * to.rawValue
+        
+        return String(format: "%.0f%", convertedValue)
     }
 }
 
