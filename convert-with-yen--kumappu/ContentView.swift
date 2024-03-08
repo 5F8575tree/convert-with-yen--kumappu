@@ -12,6 +12,7 @@ struct ContentView: View {
     @State private var selectedCurrencyTab: CurrencyTab = .usd
     @State private var amountToConvert: String = ""
     @State private var conversionResult = "0"
+    @State private var exchangeRates = [String: Double]()
     
     var body: some View {
         
@@ -101,22 +102,77 @@ struct ContentView: View {
             startRadius: 60,
             endRadius: 500
         ))
+        .onAppear {
+            ExchangeRateService().fetchExchangeRates { result in
+               switch result {
+               case .success(let rates):
+                   DispatchQueue.main.async {
+                       exchangeRates = rates
+                   }
+               case .failure(let error):
+                   print(error.localizedDescription)
+               }
+           }
+        }
     }
     
     func performConversion() {
-        let convertFrom = selectedConvertTab == .convertTo ? Currency.jpy : selectedCurrencyTab.toCurrency()
-        let convertTo = selectedConvertTab == .convertTo ? selectedCurrencyTab.toCurrency() : Currency.jpy
-        
-        conversionResult = convertAmount(amountToConvert, from: convertFrom, to: convertTo)
+        let toJPY = selectedConvertTab == .convertTo
+            conversionResult = convertAmount(amountToConvert, fromCurrencyTab: selectedCurrencyTab, toJPY: toJPY)
     }
     
-    func convertAmount(_ amount: String, from: Currency, to: Currency) -> String {
-        guard let amountAsDouble = Double(amount) else { return "" }
-        
-        let convertedValue = (amountAsDouble / from.rawValue) * to.rawValue
-        
-        return String(format: "%.0f%", convertedValue)
+    func convertAmount(_ amount: String, fromCurrencyTab: CurrencyTab, toJPY: Bool) -> String {
+        if amount.isEmpty {
+            return "0"
+        }
+
+        guard let amountAsDouble = Double(amount),
+              let usdToJpyRate = exchangeRates["JPY"],
+              let targetRate = exchangeRates[fromCurrencyTab.rawValue.uppercased()] else {
+            return "Conversion Error"
+        }
+
+        var convertedValue: Double
+        if fromCurrencyTab == .usd {
+            if toJPY {
+                convertedValue = amountAsDouble * usdToJpyRate
+            } else {
+                guard usdToJpyRate != 0 else { return "Rate error" }
+                convertedValue = amountAsDouble / usdToJpyRate
+            }
+        } else {
+            if toJPY {
+                let amountInUSD = amountAsDouble / targetRate
+                convertedValue = amountInUSD * usdToJpyRate
+            } else {
+                let amountInUSD = amountAsDouble / usdToJpyRate
+                convertedValue = amountInUSD * targetRate
+            }
+        }
+
+        if toJPY {
+            convertedValue = round(convertedValue)
+            if convertedValue < 1000 {
+                convertedValue = round(convertedValue / 10) * 10
+            } else if convertedValue < 10000 {
+                convertedValue = round(convertedValue / 50) * 50
+            } else {
+                convertedValue = round(convertedValue / 100) * 100
+            }
+            return String(format: "%.0f", convertedValue)
+        } else {
+            if amountAsDouble > 1000000 {
+                convertedValue = round(convertedValue / 50) * 50
+                return String(format: "%.0f", convertedValue)
+            } else if amountAsDouble > 10000 {
+                convertedValue = round(convertedValue / 50) * 50
+            } else {
+                convertedValue = round(convertedValue / 0.1) * 0.1
+            }
+            return String(format: "%.2f", convertedValue)
+        }
     }
+
 }
 
 extension Color {

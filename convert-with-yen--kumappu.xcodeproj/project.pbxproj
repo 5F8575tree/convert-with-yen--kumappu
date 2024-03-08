@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78308AA02B989956001D8DDE /* ExchangeRateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78308A9F2B989956001D8DDE /* ExchangeRateService.swift */; };
 		7877EB582B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7877EB572B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift */; };
 		7877EB5A2B970B84006FE9C6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7877EB592B970B84006FE9C6 /* ContentView.swift */; };
 		7877EB5C2B970B85006FE9C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7877EB5B2B970B85006FE9C6 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78308A9F2B989956001D8DDE /* ExchangeRateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateService.swift; sourceTree = "<group>"; };
 		7877EB542B970B84006FE9C6 /* convert-with-yen--kumappu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "convert-with-yen--kumappu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7877EB572B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = convert_with_yen__kumappuApp.swift; sourceTree = "<group>"; };
 		7877EB592B970B84006FE9C6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				78E5194F2B97FB4500AC8AD9 /* CurrencyTabs.swift */,
 				78E519572B9812F300AC8AD9 /* CurrencyTab.swift */,
 				78E519532B98084C00AC8AD9 /* ConvertInputField.swift */,
+				78308A9F2B989956001D8DDE /* ExchangeRateService.swift */,
 				7877EB5B2B970B85006FE9C6 /* Assets.xcassets */,
 				7877EB5D2B970B85006FE9C6 /* Preview Content */,
 			);
@@ -161,6 +164,7 @@
 				78E519522B98074E00AC8AD9 /* Currency.swift in Sources */,
 				7877EB5A2B970B84006FE9C6 /* ContentView.swift in Sources */,
 				78E519502B97FB4500AC8AD9 /* CurrencyTabs.swift in Sources */,
+				78308AA02B989956001D8DDE /* ExchangeRateService.swift in Sources */,
 				78E519582B9812F300AC8AD9 /* CurrencyTab.swift in Sources */,
 				7877EB582B970B84006FE9C6 /* convert_with_yen__kumappuApp.swift in Sources */,
 			);

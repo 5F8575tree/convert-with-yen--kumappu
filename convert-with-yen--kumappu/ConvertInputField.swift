@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ConvertInputField: View {
     @Binding var amountToConvert: String
-    @FocusState private var isTextFieldFocused: Bool
+    @FocusState var isTextFieldFocused: Bool
     
     var body: some View {
         TextField("Amount to convert", text: $amountToConvert)

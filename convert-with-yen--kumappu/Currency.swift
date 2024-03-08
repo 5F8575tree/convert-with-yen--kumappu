@@ -7,23 +7,8 @@
 
 import SwiftUI
 
-enum Currency: Double, CaseIterable, Identifiable {
-    case jpy = 140
-    case usd = 100
-    case gbp = 60
-    case cad = 200
-    case eur = 50
-    case aus = 150
+enum Currency: String, CaseIterable, Identifiable {
+    case jpy, usd, gbp, cad, eur, aud
     
-    var id: Double { rawValue }
-    
-    func convertValue(_ amountString: String, changeInto currency: Currency) -> String {
-        guard let doubledAmount = Double(amountString) else {
-            return ""
-        }
-        
-        let convertedValue = (doubledAmount / self.rawValue) * currency.rawValue
-        
-        return String(format: "%.0f%", convertedValue)
-    }
+    var id: String { self.rawValue }
 }

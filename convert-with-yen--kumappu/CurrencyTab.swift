@@ -8,13 +8,13 @@
 import Foundation
 
 enum CurrencyTab: String, CaseIterable {
-    case usd = "USD", gbp = "GBP", aus = "AUS", cad = "CAD", eur = "EUR"
+    case usd = "USD", gbp = "GBP", aud = "AUD", cad = "CAD", eur = "EUR"
     
     func toCurrency() -> Currency {
         switch self {
         case .usd: return .usd
         case .gbp: return .gbp
-        case .aus: return .aus
+        case .aud: return .aud
         case .cad: return .cad
         case .eur: return .eur
         }
